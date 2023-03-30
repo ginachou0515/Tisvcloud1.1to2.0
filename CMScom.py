@@ -55,13 +55,42 @@ def trans_combineV1(Infos,URL):
     print(f'append_to_XML1.1:{Infos}\nzone:{center}')
 
 
+def combine_zone(CMS_DATA,URL):
+    # 合併各區CMS的XML
+    zone = URL
+    data = url_xml_dict(zone)
+    str = "1day_eq_config_data_"
+    center = zone[zone.find(str) +
+                   len(str):zone.find(str) +
+                   len(str) +
+                   1].upper()
+    # str.upper() ##全部變成大寫
+    info = data["file_attribute"]
+    stops = data["file_attribute"]["oneday_eq_config_data"]["cms_data"]["cms"]
+    for stop in stops:
+        cms = ET.Element(
+            'cms', {
+                "eqId":stop["@eqId"],
+                "freewayId": stop["@freewayId"],
+                "expresswayId":stop["@expresswayId"],
+                "directionId": stop["@directionId"],
+                "milepost": stop["@milepost"],
+                "interchange": stop["@interchange"],
+                "eq_location":stop["@eq_location"],
+                "cms_type": stop["@cms_type"],
+                "px": stop["@longitude"],
+                "py": stop["@latitude"],
+                "uniqueId": stop["@uniqueId"]
+            })
+        CMS_DATA.append(cms)
+    print(f'append_to_XML:{CMS_DATA}\nzone:{center}')
+
 if __name__ == '__main__':
 
     URL_N = "http://210.241.131.244/xml/1day_eq_config_data_north.xml"
     URL_C = "http://210.241.131.244/xml/1day_eq_config_data_center.xml"
     URL_P = "http://210.241.131.244/xml/1day_eq_config_data_pinglin.xml"
     URL_S = "http://210.241.131.244/xml/1day_eq_config_data_south.xml"
-    # download_xml(URL_N)
 
     zone = URL_N
     data = url_xml_dict(zone)
@@ -76,27 +105,25 @@ if __name__ == '__main__':
     stops = data["file_attribute"]["oneday_eq_config_data"]["cms_data"]["cms"]
 
     root = ET.Element(
-        'XML_Head',
+        'file_attribute',
         attrib={
-            "version": "1.1",
-            "listname": "CMS靜態資訊",
-            "updatetime": info["@time"],
-            "interval": "86400"})
+            "file_name": info["@file_name"],
+            "control_center_id": info["@control_center_id"],
+            "time": info["@time"]})
 
-    Infos = ET.SubElement(root, 'Infos')
-    # print(f'Infos_tree:{Infos}')
-    trans_combineV1(Infos, URL_N)
-    trans_combineV1(Infos, URL_C)
-    trans_combineV1(Infos, URL_P)
-    trans_combineV1(Infos, URL_S)
+    child1 = ET.SubElement(root, "oneday_eq_config_data")
+    CMS_DATA = ET.SubElement(child1, 'cms_data')
+
+    combine_zone(CMS_DATA,URL_N)
+    combine_zone(CMS_DATA,URL_C)
+    combine_zone(CMS_DATA,URL_P)
+    combine_zone(CMS_DATA,URL_S)
 
     tree = ET.ElementTree(root)
 
     tree.write(
         os.path.join(
             os.path.dirname(__file__),'CMS',
-            "cms_info_0000.xml"),encoding="utf-8")
+            "cms_oneday_eq_config_data.xml"),encoding="utf-8")
 
-    print(f'合併XML1.1結束，輸出檔案:cms_info_0000')
-## os.path.dirname(os.path.abspath(__file__))
-## os.path.abspath(__file__)返回的是.py檔案的絕對路徑。
+    print(f'合併內網XML結束，輸出檔案:cms_eq_config')
