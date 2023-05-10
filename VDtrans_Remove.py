@@ -118,6 +118,6 @@ if __name__ == '__main__':
             os.path.dirname(__file__),'VD',
             "vd_info_0000.xml"),encoding="utf-8")
 
-    print(f'合併結束，輸出檔案:vd_info_0000.xml')
+    print(f'{info["@time"]}\n合併結束，輸出檔案:vd_info_0000.xml')
 ## os.path.dirname(os.path.abspath(__file__))
 ## os.path.abspath(__file__)返回的是.py檔案的絕對路徑。

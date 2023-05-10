@@ -97,6 +97,6 @@ if __name__ == '__main__':
             os.path.dirname(__file__),'CMS',
             "cms_info_0000.xml"),encoding="utf-8")
 
-    print(f'合併XML1.1結束，輸出檔案:cms_info_0000')
+    print(f'{info["@time"]}\n合併XML1.1結束，輸出檔案:cms_info_0000')
 ## os.path.dirname(os.path.abspath(__file__))
 ## os.path.abspath(__file__)返回的是.py檔案的絕對路徑。
