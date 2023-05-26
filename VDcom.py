@@ -22,33 +22,6 @@ def url_xml_dict(url):
     data = xmltodict.parse(html.text)
     return data
 
-
-def trans_combineV1(Infos,URL):  ##此處用不到?
-    # 從內網XML轉為1.1版本，並合併各區VD的XML
-    zone = URL
-    data = url_xml_dict(zone)
-    str = "1day_eq_config_data_"
-    center = zone[zone.find(str) +
-                   len(str):zone.find(str) +
-                   len(str) +
-                   1].upper()
-    # str.upper() ##全部變成大寫
-    info = data["file_attribute"]
-    stops = data["file_attribute"]["oneday_eq_config_data"]["vd_data"]["vd"]
-    for stop in stops:
-        Info = ET.Element(
-            'Info', {
-                "vdid": "nfb" + stop["@eqId"],
-                "roadsection": "0",
-                "locationpath": "0",  # 給""會出現locationpath錯誤，推測是因為屬性
-                "startlocationpoint": "0",
-                "endlocationpoint": "0",
-                "px": stop["@longitude"],
-                "py": stop["@latitude"]})
-        Infos.append(Info)
-    print(f'append_to_XML1.1:{Infos}\nzone:{center}')
-
-
 def combine_zone(vd_DATA,URL):
     # 合併各區vd的XML
     zone = URL
