@@ -48,11 +48,11 @@ def combine(Infos,URL):  ##修改中 0322
     eqips = data["file_attribute"]["oneday_eq_config_data"]
     stops = data["file_attribute"]["oneday_eq_config_data"]["vd_data"]["vd"]
 
-    for stop in stops: ##0322修
-        if "T62" in stop["@eqId"]:#移除公總管理的設備
+    for stop in stops: ##0526修改為以expresswayId欄位判斷，避免在尾端的被刪除，如：VD-N1-S-5-I-ES-大華系統-T62W1S
+        if "62" in stop["@expresswayId"]:#移除公總管理的設備
             print(f'不含台62：{stop["@eqId"]}')
             continue
-        if "T64" in stop["@eqId"]:#移除公總管理的設備
+        if "64" in stop["@expresswayId"]:#移除公總管理的設備
             print(f'不含台64：{stop["@eqId"]}')
             continue
         Info = ET.Element(
