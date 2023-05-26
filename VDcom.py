@@ -35,6 +35,12 @@ def combine_zone(vd_DATA,URL):
     info = data["file_attribute"]
     stops = data["file_attribute"]["oneday_eq_config_data"]["vd_data"]["vd"]
     for stop in stops:
+        if "62" in stop["@expresswayId"]:#移除公總管理的設備
+            print(f'不含台62：{stop["@eqId"]}')
+            continue
+        if "64" in stop["@expresswayId"]:#移除公總管理的設備
+            print(f'不含台64：{stop["@eqId"]}')
+            continue
         vd = ET.Element(
             'vd', {
                 "eqId":stop["@eqId"],
