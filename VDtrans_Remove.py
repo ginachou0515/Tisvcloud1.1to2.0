@@ -55,6 +55,12 @@ def combine(Infos,URL):  ##修改中 0322
         if "64" in stop["@expresswayId"]:#移除公總管理的設備
             print(f'不含台64：{stop["@eqId"]}')
             continue
+        if "66" in stop["@expresswayId"]:#移除公總管理的設備
+            print(f'不含台66：{stop["@eqId"]}')
+            continue
+        if "68" in stop["@expresswayId"]:#移除公總管理的設備
+            print(f'不含台68：{stop["@eqId"]}')
+            continue
         Info = ET.Element(
             'Info', {
                 "vdid": "nfb" + stop["@eqId"],
