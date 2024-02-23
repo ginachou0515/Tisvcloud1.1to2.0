@@ -72,7 +72,7 @@ if __name__ == '__main__':
                 "startlocationpoint":"0",
                 "endlocationpoint":"0",
                 "roadsection":str(traffic["@from_location"]), ##待改02/23
-                "roadtype":"2" if traffic["@freewayId"]==0 else "1",  ##1為高速公路、2為非高速公路
+                "roadtype":"2" if traffic["@expresswayId"]==0 else "1",  ##1為高速公路、2為非高速公路expresswayId
                 "fromkm": str(traffic["@from_milepost"]),
                 "tokm": str(traffic["@end_milepost"]),
                 "speedlimit": str(traffic["@section_lower_limit"])  ##待改02/23速限
