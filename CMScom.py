@@ -42,6 +42,19 @@ def trans_combineV1(Infos,URL):
     info = data["file_attribute"]
     stops = data["file_attribute"]["oneday_eq_config_data"]["cms_data"]["cms"]
     for stop in stops:
+        ##移除公總管理的設備
+        if "62" in stop["@expresswayId"]:#移除公總管理的設備
+            print(f'不含台62：{stop["@eqId"]}')
+            continue
+        if "64" in stop["@expresswayId"]:#移除公總管理的設備
+            print(f'不含台64：{stop["@eqId"]}')
+            continue
+        if "66" in stop["@expresswayId"]:#移除公總管理的設備
+            print(f'不含台66：{stop["@eqId"]}')
+            continue
+        if "68" in stop["@expresswayId"]:#移除公總管理的設備
+            print(f'不含台68：{stop["@eqId"]}')
+            continue
         Info = ET.Element(
             'Info', {
                 "cmsid": "nfb" + stop["@eqId"],
