@@ -43,6 +43,9 @@ if __name__ == '__main__':
     tree = ET.parse('SectionLink.xml')  # 解析為ElementTree對象
     root = tree.getroot()  # 獲取根元素
 
+    Shapetree = ET.parse('SectionShape.xml')  # 解析為ElementTree對象
+    Shaperoot = Shapetree.getroot()  # 獲取根元素
+
     deleted_id = []
     with open('delete.txt') as reader:
         for line in reader:
@@ -51,6 +54,7 @@ if __name__ == '__main__':
 
     ns = {"LinkList": "http://ptx.transportdata.tw/standard/schema/TIX"}
 
+    ####SectionLink######
     for Section in root.findall('LinkList:SectionLinks', ns):
         for SectionLink in Section.findall('LinkList:SectionLink', ns):
             SectionID = SectionLink.find('LinkList:SectionID', ns)
@@ -58,4 +62,14 @@ if __name__ == '__main__':
             if SectionID.text in deleted_id:  # 刪除包含在deleted_id內的資料
                 print(f'SectionID(del):{SectionID.text}')
                 Section.remove(SectionLink)  # 删除SectionLinks下的元素標籤[非根標籤!!!!]
-    tree.write('modified.xml')  # 保存修改後的XML文件
+    tree.write('SectionLink_modified.xml')  # 保存修改後的XML文件
+
+    ####SectionShape######
+    for Shape in Shaperoot.findall('LinkList:SectionShapes', ns):
+        for SectionShape in Shape.findall('LinkList:SectionShape', ns):
+            SectionID = SectionShape.find('LinkList:SectionID', ns)
+            print(f'SectionID(Shape)：{SectionID.text}')
+            if SectionID.text in deleted_id:  # 刪除包含在deleted_id內的資料
+                print(f'SectionID(del):{SectionID.text}')
+                Shape.remove(SectionShape)  # 删除SectionLinks下的元素標籤[非根標籤!!!!]
+    Shapetree.write('SectionShape_modified.xml')  # 保存修改後的XML文件
