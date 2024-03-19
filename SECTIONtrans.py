@@ -106,6 +106,23 @@ if __name__ == '__main__':
         roadsection= RoadID+ "(" +  start + "到" + end +")"
         print(f'路段名稱：{roadsection}')
 
+        ##---------里程換算為K+-------------###
+        arr = int(traffic["@from_milepost"])/1000
+        from_m = str(arr)
+        from_m = from_m.split('.')
+        print(f'里程(千)：{from_m}')
+        from_m[-1] = str(from_m[-1])
+        if len(from_m[-1])== 3:  # 判斷字元長度
+            from_m[-1] = from_m[-1]  # 字元不變
+        elif len(from_m[-1])== 2:
+            from_m[-1] = from_m[-1] +"0"  # 補0字元
+        else:
+            from_m[-1] = from_m[-1] + "00"  # 補0字元
+        print(f'里程(百)：{from_m[-1]}')
+        from_milepost = from_m[0] + "K+" + from_m[-1]
+        print(f'里程(K+)：{from_milepost}')
+        # fromkm = str(traffic["@from_milepost"])
+
 
         Info = ET.Element(
             'Info', {
