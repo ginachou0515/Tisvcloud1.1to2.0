@@ -40,9 +40,11 @@ def ReadExcel(file, sheet=0):
 if __name__ == '__main__':
     ET.register_namespace(
         '', "http://ptx.transportdata.tw/standard/schema/TIX")  # 註冊命名空間
-    tree = ET.parse('SectionLink.xml')  # 解析為ElementTree對象
-    root = tree.getroot()  # 獲取根元素
 
+    tree = ET.parse('Section.xml')  # 解析為ElementTree對象
+    root = tree.getroot()  # 獲取根元素
+    Linktree = ET.parse('SectionLink.xml')  # 解析為ElementTree對象
+    Linkroot = Linktree.getroot()  # 獲取根元素
     Shapetree = ET.parse('SectionShape.xml')  # 解析為ElementTree對象
     Shaperoot = Shapetree.getroot()  # 獲取根元素
 
@@ -54,18 +56,33 @@ if __name__ == '__main__':
 
     ns = {"LinkList": "http://ptx.transportdata.tw/standard/schema/TIX"}
 
-    ####SectionLink######
-    for Section in root.findall('LinkList:SectionLinks', ns):
-        for SectionLink in Section.findall('LinkList:SectionLink', ns):
+    ####Section######
+    for Section in root.findall('LinkList:Sections', ns):
+        print(f'路段基本資訊(Section)修改')
+        for SectionLink in Section.findall('LinkList:Section', ns):
             SectionID = SectionLink.find('LinkList:SectionID', ns)
             print(f'SectionID：{SectionID.text}')
             if SectionID.text in deleted_id:  # 刪除包含在deleted_id內的資料
                 print(f'SectionID(del):{SectionID.text}')
                 Section.remove(SectionLink)  # 删除SectionLinks下的元素標籤[非根標籤!!!!]
-    tree.write('SectionLink_modified.xml')  # 保存修改後的XML文件
+    tree.write('Section_modified.xml')  # 保存修改後的XML文件
+    print(f'Section修改完成，輸出Section_modified.xml')
+
+    ####SectionLink######
+    for Link in Linkroot.findall('LinkList:SectionLinks', ns):
+        print(f'路段基礎組合對應資訊(SectionLink)修改')
+        for SectionLink in Link.findall('LinkList:SectionLink', ns):
+            SectionID = SectionLink.find('LinkList:SectionID', ns)
+            print(f'SectionID：{SectionID.text}')
+            if SectionID.text in deleted_id:  # 刪除包含在deleted_id內的資料
+                print(f'SectionID(del):{SectionID.text}')
+                Link.remove(SectionLink)  # 删除SectionLinks下的元素標籤[非根標籤!!!!]
+    Linktree.write('SectionLink_modified.xml')  # 保存修改後的XML文件
+    print(f'SectionLink修改完成，輸出SectionLink_modified.xml')
 
     ####SectionShape######
     for Shape in Shaperoot.findall('LinkList:SectionShapes', ns):
+        print(f'路段線型圖資資訊(SectionShape)修改')
         for SectionShape in Shape.findall('LinkList:SectionShape', ns):
             SectionID = SectionShape.find('LinkList:SectionID', ns)
             print(f'SectionID(Shape)：{SectionID.text}')
@@ -73,3 +90,4 @@ if __name__ == '__main__':
                 print(f'SectionID(del):{SectionID.text}')
                 Shape.remove(SectionShape)  # 删除SectionLinks下的元素標籤[非根標籤!!!!]
     Shapetree.write('SectionShape_modified.xml')  # 保存修改後的XML文件
+    print(f'SectionShape修改完成，輸出SectionShape_modified.xml')
