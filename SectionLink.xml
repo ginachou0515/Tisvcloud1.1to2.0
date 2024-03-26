@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><SectionLinkList xmlns="http://ptx.transportdata.tw/standard/schema/TIX" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ptx.transportdata.tw/standard/schema">
-  <UpdateTime>2024-03-04T00:00:00+08:00</UpdateTime>
+  <UpdateTime>2024-03-25T00:00:00+08:00</UpdateTime>
   <UpdateInterval>86400</UpdateInterval>
   <AuthorityCode>NFB</AuthorityCode>
   <SectionLinks>
