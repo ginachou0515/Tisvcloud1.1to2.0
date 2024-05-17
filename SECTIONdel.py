@@ -53,6 +53,7 @@ if __name__ == '__main__':
         for line in reader:
             line = line.strip()
             deleted_id.append(line)
+    ##20240417測試加入刪除南港聯絡道、高港高架、汐五高架
 
     ns = {"LinkList": "http://ptx.transportdata.tw/standard/schema/TIX"}
 

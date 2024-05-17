@@ -1,5 +1,5 @@
 <SectionLinkList xmlns="http://ptx.transportdata.tw/standard/schema/TIX" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ptx.transportdata.tw/standard/schema">
-  <UpdateTime>2024-03-04T00:00:00+08:00</UpdateTime>
+  <UpdateTime>2024-05-14T14:21:06+08:00</UpdateTime>
   <UpdateInterval>86400</UpdateInterval>
   <AuthorityCode>NFB</AuthorityCode>
   <SectionLinks>
@@ -168,6 +168,7 @@
         <LinkID>0000100003400F</LinkID>
         <LinkID>0000100003480F</LinkID>
         <LinkID>0000100003500F</LinkID>
+        <LinkID>0000100003528F</LinkID>
         <LinkID>0000100003600F</LinkID>
       </LinkIDs>
     </SectionLink>
@@ -523,6 +524,12 @@
         <LinkID>0000100017000B</LinkID>
         <LinkID>0000100017100B</LinkID>
         <LinkID>0000100017200B</LinkID>
+        <LinkID>0000100017300B</LinkID>
+      </LinkIDs>
+    </SectionLink>
+    <SectionLink>
+      <SectionID>0493</SectionID>
+      <LinkIDs>
         <LinkID>0000100017300B</LinkID>
         <LinkID>0000100017380B</LinkID>
         <LinkID>0000100017400B</LinkID>
@@ -1572,8 +1579,6 @@
     <SectionLink>
       <SectionID>0080</SectionID>
       <LinkIDs>
-        <LinkID>0000100117400B</LinkID>
-        <LinkID>0000100117390B</LinkID>
         <LinkID>0000100117300B</LinkID>
         <LinkID>0000100117200B</LinkID>
         <LinkID>0000100117100B</LinkID>
@@ -1581,6 +1586,14 @@
         <LinkID>0000100116900B</LinkID>
         <LinkID>0000100116870B</LinkID>
         <LinkID>0000100116800B</LinkID>
+      </LinkIDs>
+    </SectionLink>
+    <SectionLink>
+      <SectionID>0494</SectionID>
+      <LinkIDs>
+        <LinkID>0000100117400B</LinkID>
+        <LinkID>0000100117390B</LinkID>
+        <LinkID>0000100117300B</LinkID>
       </LinkIDs>
     </SectionLink>
     <SectionLink>
@@ -2114,6 +2127,69 @@
       </LinkIDs>
     </SectionLink>
     <SectionLink>
+      <SectionID>0475</SectionID>
+      <LinkIDs>
+        <LinkID>0000100000000C</LinkID>
+        <LinkID>0000100000040C</LinkID>
+        <LinkID>0000100000080C</LinkID>
+      </LinkIDs>
+    </SectionLink>
+    <SectionLink>
+      <SectionID>0477</SectionID>
+      <LinkIDs>
+        <LinkID>0000100000080C</LinkID>
+        <LinkID>0000100000110C</LinkID>
+        <LinkID>0000100000130C</LinkID>
+      </LinkIDs>
+    </SectionLink>
+    <SectionLink>
+      <SectionID>0479</SectionID>
+      <LinkIDs>
+        <LinkID>0000100000130C</LinkID>
+        <LinkID>0000100000200C</LinkID>
+      </LinkIDs>
+    </SectionLink>
+    <SectionLink>
+      <SectionID>0481</SectionID>
+      <LinkIDs>
+        <LinkID>0000100000200C</LinkID>
+        <LinkID>0000100000260C</LinkID>
+        <LinkID>0000100000300C</LinkID>
+      </LinkIDs>
+    </SectionLink>
+    <SectionLink>
+      <SectionID>0476</SectionID>
+      <LinkIDs>
+        <LinkID>0000100100100C</LinkID>
+        <LinkID>0000100100070C</LinkID>
+        <LinkID>0000100100050C</LinkID>
+        <LinkID>0000100100000C</LinkID>
+      </LinkIDs>
+    </SectionLink>
+    <SectionLink>
+      <SectionID>0478</SectionID>
+      <LinkIDs>
+        <LinkID>0000100100160C</LinkID>
+        <LinkID>0000100100100C</LinkID>
+        <LinkID>0000100100070C</LinkID>
+      </LinkIDs>
+    </SectionLink>
+    <SectionLink>
+      <SectionID>0480</SectionID>
+      <LinkIDs>
+        <LinkID>0000100100200C</LinkID>
+        <LinkID>0000100100160C</LinkID>
+      </LinkIDs>
+    </SectionLink>
+    <SectionLink>
+      <SectionID>0482</SectionID>
+      <LinkIDs>
+        <LinkID>0000100100300C</LinkID>
+        <LinkID>0000100100270C</LinkID>
+        <LinkID>0000100100200C</LinkID>
+      </LinkIDs>
+    </SectionLink>
+    <SectionLink>
       <SectionID>0159</SectionID>
       <LinkIDs>
         <LinkID>00001A0001300F</LinkID>
@@ -2167,14 +2243,13 @@
         <LinkID>00001B0003300F</LinkID>
         <LinkID>00001B0003400F</LinkID>
         <LinkID>00001B0003500F</LinkID>
-        <LinkID>00001B0003550F</LinkID>
         <LinkID>00001B0003600F</LinkID>
       </LinkIDs>
     </SectionLink>
     <SectionLink>
       <SectionID>0435</SectionID>
       <LinkIDs>
-        <LinkID>00001B0003550F</LinkID>
+        <LinkID>00001B0003500F</LinkID>
         <LinkID>00001B0003600F</LinkID>
         <LinkID>00001B0003640F</LinkID>
         <LinkID>00001B0003700F</LinkID>
@@ -2490,6 +2565,20 @@
         <LinkID>0000200102000H</LinkID>
         <LinkID>0000200101910H</LinkID>
         <LinkID>0000200101800H</LinkID>
+      </LinkIDs>
+    </SectionLink>
+    <SectionLink>
+      <SectionID>0491</SectionID>
+      <LinkIDs>
+        <LinkID>0000210000000H</LinkID>
+        <LinkID>0000210000062H</LinkID>
+      </LinkIDs>
+    </SectionLink>
+    <SectionLink>
+      <SectionID>0492</SectionID>
+      <LinkIDs>
+        <LinkID>0000210100061H</LinkID>
+        <LinkID>0000210100000H</LinkID>
       </LinkIDs>
     </SectionLink>
     <SectionLink>
@@ -4920,6 +5009,28 @@
       </LinkIDs>
     </SectionLink>
     <SectionLink>
+      <SectionID>0485</SectionID>
+      <LinkIDs>
+        <LinkID>0000400001760B</LinkID>
+        <LinkID>0000400001839B</LinkID>
+        <LinkID>0000400002017B</LinkID>
+        <LinkID>0000400002040B</LinkID>
+        <LinkID>0000400002084B</LinkID>
+        <LinkID>0000400002096B</LinkID>
+        <LinkID>0000400002254B</LinkID>
+        <LinkID>0000400002354B</LinkID>
+        <LinkID>0000400002454B</LinkID>
+        <LinkID>0000400002600B</LinkID>
+      </LinkIDs>
+    </SectionLink>
+    <SectionLink>
+      <SectionID>0487</SectionID>
+      <LinkIDs>
+        <LinkID>0000400002600B</LinkID>
+        <LinkID>0000400002734B</LinkID>
+      </LinkIDs>
+    </SectionLink>
+    <SectionLink>
       <SectionID>0356</SectionID>
       <LinkIDs>
         <LinkID>0000400100200B</LinkID>
@@ -4975,6 +5086,19 @@
         <LinkID>0000400101500B</LinkID>
         <LinkID>0000400101450B</LinkID>
         <LinkID>0000400101400B</LinkID>
+      </LinkIDs>
+    </SectionLink>
+    <SectionLink>
+      <SectionID>0486</SectionID>
+      <LinkIDs>
+        <LinkID>0000400102600B</LinkID>
+      </LinkIDs>
+    </SectionLink>
+    <SectionLink>
+      <SectionID>0488</SectionID>
+      <LinkIDs>
+        <LinkID>0000400102713B</LinkID>
+        <LinkID>0000400102600B</LinkID>
       </LinkIDs>
     </SectionLink>
     <SectionLink>
@@ -6030,6 +6154,12 @@
         <LinkID>1007400001900B</LinkID>
         <LinkID>1007400001950B</LinkID>
         <LinkID>1007400002000B</LinkID>
+      </LinkIDs>
+    </SectionLink>
+    <SectionLink>
+      <SectionID>2275</SectionID>
+      <LinkIDs>
+        <LinkID>1007400002000B</LinkID>
         <LinkID>1007400002033B</LinkID>
         <LinkID>1007400002100B</LinkID>
         <LinkID>1007400002160B</LinkID>
@@ -6198,14 +6328,20 @@
     <SectionLink>
       <SectionID>2256</SectionID>
       <LinkIDs>
+        <LinkID>1007400102000B</LinkID>
+        <LinkID>1007400101950B</LinkID>
+        <LinkID>1007400101900B</LinkID>
+        <LinkID>1007400101820B</LinkID>
+      </LinkIDs>
+    </SectionLink>
+    <SectionLink>
+      <SectionID>2276</SectionID>
+      <LinkIDs>
         <LinkID>1007400102200B</LinkID>
         <LinkID>1007400102160B</LinkID>
         <LinkID>1007400102100B</LinkID>
         <LinkID>1007400102036B</LinkID>
         <LinkID>1007400102000B</LinkID>
-        <LinkID>1007400101950B</LinkID>
-        <LinkID>1007400101900B</LinkID>
-        <LinkID>1007400101820B</LinkID>
       </LinkIDs>
     </SectionLink>
     <SectionLink>

@@ -35,6 +35,23 @@ def url_xml_dict(url):
 def ReadExcel(file, sheet=0):
     return pd.read_excel(file, sheet_name=sheet)
 
+def MilesCconversion(milage):
+    ##---------里程換算為K+-------------###
+    arr = int(milage) / 1000
+    milage_str = str(arr)
+    milage_str = milage_str .split('.')
+    # print(f'里程(千)：{milage_thou}')
+    milage_str[-1] = str(milage_str[-1])
+    if len(milage_str[-1]) == 3:  # 判斷字元長度
+        milage_str[-1] = milage_str[-1]  # 字元不變
+    elif len(milage_str[-1]) == 2:
+        milage_str[-1] = milage_str[-1] + "0"  # 補0字元
+    else:
+        milage_str[-1] = milage_str[-1] + "00"  # 補0字元
+    # print(f'里程(百)：{milage_str[-1]}')
+    milepost = milage_str[0] + "K+" + milage_str[-1]
+    print(f'里程(K+)：{milepost}')
+    return milepost
 
 if __name__ == '__main__':
     URL = "http://210.241.131.244/xml/section_1968_traffic_data.xml"
@@ -89,7 +106,6 @@ if __name__ == '__main__':
                         traffic["@expresswayId"]]['1.1版本'].values[0]
             # print(f'快速道路編碼：{traffic["@expresswayId"]}\tRoadId：{RoadID}')
         # print(f'freewayId:{traffic["@freewayId"]}\texpresswayId:{traffic["@expresswayId"]}\t道路種類:{roadtype}')
-
         ##---------路段名稱-------------###
         ##起點##
         if "端" in traffic["@from_location"] or "服務區" in traffic["@from_location"] or "休息" in traffic["@from_location"] or "站" in traffic["@from_location"]:
@@ -106,23 +122,26 @@ if __name__ == '__main__':
         roadsection= RoadID+ "(" +  start + "到" + end +")"
         print(f'路段名稱：{roadsection}')
 
-        ##---------里程換算為K+-------------###
-        arr = int(traffic["@from_milepost"])/1000
-        from_m = str(arr)
-        from_m = from_m.split('.')
-        print(f'里程(千)：{from_m}')
-        from_m[-1] = str(from_m[-1])
-        if len(from_m[-1])== 3:  # 判斷字元長度
-            from_m[-1] = from_m[-1]  # 字元不變
-        elif len(from_m[-1])== 2:
-            from_m[-1] = from_m[-1] +"0"  # 補0字元
-        else:
-            from_m[-1] = from_m[-1] + "00"  # 補0字元
-        print(f'里程(百)：{from_m[-1]}')
-        from_milepost = from_m[0] + "K+" + from_m[-1]
-        print(f'里程(K+)：{from_milepost}')
-        # fromkm = str(traffic["@from_milepost"])
-
+        #
+        # def MilesCconversion(milage, sheet=0):
+        #     ##---------里程換算為K+-------------###
+        #     arr = int(traffic["@from_milepost"]) / 1000
+        #     from_m = str(arr)
+        #     from_m = from_m.split('.')
+        #     # print(f'里程(千)：{from_m}')
+        #     from_m[-1] = str(from_m[-1])
+        #     if len(from_m[-1]) == 3:  # 判斷字元長度
+        #         from_m[-1] = from_m[-1]  # 字元不變
+        #     elif len(from_m[-1]) == 2:
+        #         from_m[-1] = from_m[-1] + "0"  # 補0字元
+        #     else:
+        #         from_m[-1] = from_m[-1] + "00"  # 補0字元
+        #     # print(f'里程(百)：{from_m[-1]}')
+        #     from_milepost = from_m[0] + "K+" + from_m[-1]
+        #     print(f'里程(K+)：{from_milepost}')
+        #     return milepost
+        from_milepost =MilesCconversion(traffic["@from_milepost"])
+        to_milepost = MilesCconversion(traffic["@end_milepost"])
 
         Info = ET.Element(
             'Info', {
@@ -131,10 +150,10 @@ if __name__ == '__main__':
                 "locationpath": "0",  # 給""會出現locationpath錯誤，推測是因為屬性
                 "startlocationpoint": "0",
                 "endlocationpoint": "0",
-                "roadsection": str(roadsection),  #
+                "roadsection": str(roadsection),  # roadsection 之後需再丟入Xml_update更新
                 "roadtype": str(roadtype),  # 1為高速公路、2為非高速公路expresswayId
-                "fromkm": str(traffic["@from_milepost"]), # 待改02/27
-                "tokm": str(traffic["@end_milepost"]), # 待改02/27
+                "fromkm": str(from_milepost), # 待改05/14  str(traffic["@from_milepost"])
+                "tokm": str(to_milepost), # 待改05/14  str(traffic["@end_milepost"])
                 "speedlimit": str(traffic["@section_lower_limit"])  # 待改02/27速限
             })
 
@@ -148,3 +167,6 @@ if __name__ == '__main__':
     print(f'{info["@time"]}\n合併結束，輸出檔案:roadlevel_info_0000.xml')
 # os.path.dirname(os.path.abspath(__file__))
 # os.path.abspath(__file__)返回的是.py檔案的絕對路徑。
+
+
+#一、SECTIONtrans檔案：SECTION產出1.1版本(待修fromkm、tokm、速限等資料)
