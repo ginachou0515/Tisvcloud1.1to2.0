@@ -29,7 +29,15 @@ def url_xml_dict(url):
        return: XML轉換成Python的字典格式'''
     html = requests.get(url)
     data = xmltodict.parse(html.text)
+    # print(f'html(type):{type(html)}\ndata(type):{type(data)}')
     return data
+
+def xml_file_to_dict(file_path):
+    "從檔案轉換為字典"
+    with open(file_path, 'r',encoding="utf-8") as xml_file:
+        xml_data = xml_file.read()
+        dict_data = xmltodict.parse(xml_data)
+        return dict_data
 
 # 讀取excel檔
 def ReadExcel(file, sheet=0):
@@ -55,16 +63,18 @@ def MilesCconversion(milage):
 
 if __name__ == '__main__':
     URL = "http://210.241.131.244/xml/section_1968_traffic_data.xml"
+    file_path = "00_section_1968_traffic_data.xml"
     # download_xml(URL)
     ### 路段名稱###.
     file_name = "道路名稱.xlsx"
     df = ReadExcel(file_name, f"道路編碼")  # 道路編碼 省道速限 國道速限
     # 轉為文字類別
     df[["RoadId"]] = df[["RoadId"]].astype(str)  # RoadId	1.1版本	交通局
-    # print(df.info())
-    # print(f'{type(df)}\n{df}')
+    # print(f'{type(df)}\n{df}')  ##print(df.info())
 
-    data = url_xml_dict(URL)
+    # data = url_xml_dict(URL)  ##線上網址轉換
+    data =  xml_file_to_dict(file_path)  ##讀取資料從檔案轉換為字典
+
     info = data["file_attribute"]
     section_traffic = data["file_attribute"]["section_traffic_data"]
     traffics = data["file_attribute"]["section_traffic_data"]["traffic_data"]
@@ -162,7 +172,7 @@ if __name__ == '__main__':
     tree.write(
         os.path.join(
             os.path.dirname(__file__), 'Section',
-            "roadlevel_test.xml"), encoding="utf-8")
+            "roadlevel_info_0000.xml"), encoding="utf-8")
 
     print(f'{info["@time"]}\n合併結束，輸出檔案:roadlevel_info_0000.xml')
 # os.path.dirname(os.path.abspath(__file__))
@@ -170,3 +180,5 @@ if __name__ == '__main__':
 
 
 #一、SECTIONtrans檔案：SECTION產出1.1版本(待修fromkm、tokm、速限等資料)
+#https://book.martiandefense.llc/notes/coding-programming/python/xml-basics-with-python
+##https://www.tutorialspoint.com/python-program-to-convert-xml-to-dictionary

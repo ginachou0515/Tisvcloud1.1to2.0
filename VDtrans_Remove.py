@@ -25,9 +25,10 @@ def url_xml_dict(url):
        url: xml網址
        return: XML轉換成Python的字典格式'''
     html = requests.get(url)
+    html.encoding = html.apparent_encoding ##內容解碼跟編碼不一致 1130607
     data = xmltodict.parse(html.text)
     return data
-
+#https://blog.csdn.net/lilongsy/article/details/122140098
 
 def combine(Infos,URL):  ##修改中 0322
     # 合併各區的XML
@@ -84,11 +85,14 @@ def combine(Infos,URL):  ##修改中 0322
 
 
 if __name__ == '__main__':
-
-    URL_N = "http://210.241.131.244/xml/1day_eq_config_data_north.xml"
-    URL_C = "http://210.241.131.244/xml/1day_eq_config_data_center.xml"
-    URL_P = "http://210.241.131.244/xml/1day_eq_config_data_pinglin.xml"
-    URL_S = "http://210.241.131.244/xml/1day_eq_config_data_south.xml"
+    # URL_N = "http://210.241.131.244/xml/1day_eq_config_data_north.xml"
+    # URL_C = "http://210.241.131.244/xml/1day_eq_config_data_center.xml"
+    # URL_P = "http://210.241.131.244/xml/1day_eq_config_data_pinglin.xml"
+    # URL_S = "http://210.241.131.244/xml/1day_eq_config_data_south.xml"
+    URL_N = "https://tisv.tcloud.freeway.gov.tw/xml/cloud_10/10_1day_eq_config_data.xml"
+    URL_C = "https://tisv.tcloud.freeway.gov.tw/xml/cloud_30/30_1day_eq_config_data.xml"
+    URL_P = "https://tisv.tcloud.freeway.gov.tw/xml/cloud_20/20_1day_eq_config_data.xml"
+    URL_S = "https://tisv.tcloud.freeway.gov.tw/xml/cloud_40/40_1day_eq_config_data.xml"
 
     zone = URL_N
     data = url_xml_dict(zone)

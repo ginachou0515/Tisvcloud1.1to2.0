@@ -19,13 +19,18 @@ def url_xml_dict(url):
        url: xml網址
        return: XML轉換成Python的字典格式'''
     html = requests.get(url)
-    data = xmltodict.parse(html.text)
+    html.encoding = html.apparent_encoding ##內容解碼跟編碼不一致
+    data = xmltodict.parse(html.text) ##1130607 ,encoding="utf-8"
+    # print(f'html.text：{html.text}\ntype:{type(html.text)}')
+    # print(f'data：{data}')
     return data
+#https://blog.csdn.net/lilongsy/article/details/122140098
 
 def combine_zone(vd_DATA,URL):
     # 合併各區vd的XML
     zone = URL
     data = url_xml_dict(zone)
+    # print(f'data：{data}')
     str = "1day_eq_config_data_"
     center = zone[zone.find(str) +
                    len(str):zone.find(str) +
@@ -61,15 +66,19 @@ def combine_zone(vd_DATA,URL):
                 "py": stop["@latitude"],
                 "uniqueId": stop["@uniqueId"]
             })
+        # print(f'eqId：{stop["@eqId"]}')
         vd_DATA.append(vd)
     print(f'append_to_XML:{vd_DATA}\nzone:{center}')
 
 if __name__ == '__main__':
-
-    URL_N = "http://210.241.131.244/xml/1day_eq_config_data_north.xml"
-    URL_C = "http://210.241.131.244/xml/1day_eq_config_data_center.xml"
-    URL_P = "http://210.241.131.244/xml/1day_eq_config_data_pinglin.xml"
-    URL_S = "http://210.241.131.244/xml/1day_eq_config_data_south.xml"
+    # URL_N = "http://210.241.131.244/xml/1day_eq_config_data_north.xml"
+    # URL_C = "http://210.241.131.244/xml/1day_eq_config_data_center.xml"
+    # URL_P = "http://210.241.131.244/xml/1day_eq_config_data_pinglin.xml"
+    # URL_S = "http://210.241.131.244/xml/1day_eq_config_data_south.xml"
+    URL_N = "https://tisv.tcloud.freeway.gov.tw/xml/cloud_10/10_1day_eq_config_data.xml"
+    URL_C = "https://tisv.tcloud.freeway.gov.tw/xml/cloud_30/30_1day_eq_config_data.xml"
+    URL_P = "https://tisv.tcloud.freeway.gov.tw/xml/cloud_20/20_1day_eq_config_data.xml"
+    URL_S = "https://tisv.tcloud.freeway.gov.tw/xml/cloud_40/40_1day_eq_config_data.xml"
 
     zone = URL_N
     data = url_xml_dict(zone)
@@ -103,6 +112,6 @@ if __name__ == '__main__':
     tree.write(
         os.path.join(
             os.path.dirname(__file__),'vd',
-            "vd_oneday_eq_config_data.xml"),encoding="utf-8")
+            "vd_oneday_eq_config_data.xml"),encoding="utf-8")  ##,encoding="utf-8"
 
     print(f'合併內網XML結束，輸出檔案:vd_eq_config')
