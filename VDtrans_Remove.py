@@ -62,6 +62,12 @@ def combine(Infos,URL):  ##修改中 0322
         if "68" in stop["@expresswayId"]:#移除公總管理的設備
             print(f'不含台68：{stop["@eqId"]}')
             continue
+        ##2024/07/15##
+        if "RS" in stop["@eqId"]:
+            location = "1"
+        else:
+            location = "5"
+
         Info = ET.Element(
             'Info', {
                 "vdid": "nfb" + stop["@eqId"],
@@ -73,7 +79,7 @@ def combine(Infos,URL):  ##修改中 0322
                 "roadway": "單向",
                 "vsrnum": stop["@lanes"],
                 "vdtype": stop["@vd_category"],
-                "locationtype": "N(車道/路側)",  ##待思考怎麼改
+                "locationtype": location,  ##待思考設置位置怎麼改 "N(車道/路側)"
                 "px": stop["@longitude"],
                 "py": stop["@latitude"]})
 

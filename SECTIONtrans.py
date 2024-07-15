@@ -132,24 +132,6 @@ if __name__ == '__main__':
         roadsection= RoadID+ "(" +  start + "到" + end +")"
         print(f'路段名稱：{roadsection}')
 
-        #
-        # def MilesCconversion(milage, sheet=0):
-        #     ##---------里程換算為K+-------------###
-        #     arr = int(traffic["@from_milepost"]) / 1000
-        #     from_m = str(arr)
-        #     from_m = from_m.split('.')
-        #     # print(f'里程(千)：{from_m}')
-        #     from_m[-1] = str(from_m[-1])
-        #     if len(from_m[-1]) == 3:  # 判斷字元長度
-        #         from_m[-1] = from_m[-1]  # 字元不變
-        #     elif len(from_m[-1]) == 2:
-        #         from_m[-1] = from_m[-1] + "0"  # 補0字元
-        #     else:
-        #         from_m[-1] = from_m[-1] + "00"  # 補0字元
-        #     # print(f'里程(百)：{from_m[-1]}')
-        #     from_milepost = from_m[0] + "K+" + from_m[-1]
-        #     print(f'里程(K+)：{from_milepost}')
-        #     return milepost
         from_milepost =MilesCconversion(traffic["@from_milepost"])
         to_milepost = MilesCconversion(traffic["@end_milepost"])
 
@@ -175,10 +157,11 @@ if __name__ == '__main__':
             "roadlevel_info_0000.xml"), encoding="utf-8")
 
     print(f'{info["@time"]}\n合併結束，輸出檔案:roadlevel_info_0000.xml')
+
+####20240613 因汐五高架里程數TDX只編到70KM，楊梅休息站到楊梅端路段>70無法讀取，故需刪除489、490再去跑MOTC_SectionLinkListXML
 # os.path.dirname(os.path.abspath(__file__))
 # os.path.abspath(__file__)返回的是.py檔案的絕對路徑。
 
-
-#一、SECTIONtrans檔案：SECTION產出1.1版本(待修fromkm、tokm、速限等資料)
+#一、SECTIONtrans檔案：SECTION產出1.1版本(待修速限等資料)
 #https://book.martiandefense.llc/notes/coding-programming/python/xml-basics-with-python
 ##https://www.tutorialspoint.com/python-program-to-convert-xml-to-dictionary

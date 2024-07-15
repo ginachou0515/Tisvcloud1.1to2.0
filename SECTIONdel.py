@@ -43,9 +43,9 @@ if __name__ == '__main__':
 
     tree = ET.parse('Section.xml')  # 解析為ElementTree對象
     root = tree.getroot()  # 獲取根元素
-    Linktree = ET.parse('SectionLink.xml')  # 解析為ElementTree對象
+    Linktree = ET.parse('SectionLinkList.xml')  # 解析為ElementTree對象
     Linkroot = Linktree.getroot()  # 獲取根元素
-    Shapetree = ET.parse('SectionShape.xml')  # 解析為ElementTree對象
+    Shapetree = ET.parse('SectionShapeList.xml')  # 解析為ElmentTree對象
     Shaperoot = Shapetree.getroot()  # 獲取根元素
 
     deleted_id = []
@@ -53,7 +53,6 @@ if __name__ == '__main__':
         for line in reader:
             line = line.strip()
             deleted_id.append(line)
-    ##20240417測試加入刪除南港聯絡道、高港高架、汐五高架
 
     ns = {"LinkList": "http://ptx.transportdata.tw/standard/schema/TIX"}
 
@@ -78,8 +77,8 @@ if __name__ == '__main__':
             if SectionID.text in deleted_id:  # 刪除包含在deleted_id內的資料
                 print(f'SectionID(del):{SectionID.text}')
                 Link.remove(SectionLink)  # 删除SectionLinks下的元素標籤[非根標籤!!!!]
-    Linktree.write('SectionLink_modified.xml')  # 保存修改後的XML文件
-    print(f'SectionLink修改完成，輸出SectionLink_modified.xml')
+    Linktree.write('SectionLinkList_modified.xml')  # 保存修改後的XML文件
+    print(f'SectionLink修改完成，輸出SectionLinkList_modified.xml')
 
     ####SectionShape######
     for Shape in Shaperoot.findall('LinkList:SectionShapes', ns):
@@ -90,5 +89,5 @@ if __name__ == '__main__':
             if SectionID.text in deleted_id:  # 刪除包含在deleted_id內的資料
                 print(f'SectionID(del):{SectionID.text}')
                 Shape.remove(SectionShape)  # 删除SectionLinks下的元素標籤[非根標籤!!!!]
-    Shapetree.write('SectionShape_modified.xml')  # 保存修改後的XML文件
-    print(f'SectionShape修改完成，輸出SectionShape_modified.xml')
+    Shapetree.write('SectionShapeList_modified.xml')  # 保存修改後的XML文件
+    print(f'SectionShape修改完成，輸出SectionShapeList_modified.xml')
