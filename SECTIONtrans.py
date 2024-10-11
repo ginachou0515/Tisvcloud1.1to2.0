@@ -63,13 +63,14 @@ def MilesCconversion(milage):
 
 if __name__ == '__main__':
     URL = "http://210.241.131.244/xml/section_1968_traffic_data.xml"
+    # URL = "https://tisv.tcloud.freeway.gov.tw/xml/cloud_10/00_section_1968_traffic_data.xml"
     file_path = "00_section_1968_traffic_data.xml"
     # download_xml(URL)
     ### 路段名稱###.
     file_name = "道路名稱.xlsx"
     df = ReadExcel(file_name, f"道路編碼")  # 道路編碼 省道速限 國道速限
     # 轉為文字類別
-    df[["RoadId"]] = df[["RoadId"]].astype(str)  # RoadId	1.1版本	交通局
+    df[["編碼"]] = df[["編碼"]].astype(str)  #編碼	RoadId	1.1版本	交通局
     # print(f'{type(df)}\n{df}')  ##print(df.info())
 
     # data = url_xml_dict(URL)  ##線上網址轉換
@@ -107,14 +108,14 @@ if __name__ == '__main__':
         #     continue
         if traffic["@expresswayId"] == "0":  # 判斷國道/非國道
             roadtype = 1  # 國道
-            FI = df[df['RoadId'] == traffic["@freewayId"]]  # 產出道路名稱
+            FI = df[df['編碼'] == traffic["@freewayId"]]  # 產出道路名稱 ##'RoadId'改為編碼
             RoadID = FI['1.1版本'].values[0]
-            # print(f'高速公路編碼：{traffic["@freewayId"]}\tRoadId：{RoadID}')
+            print(f'高速公路編碼：{traffic["@freewayId"]}\tRoadId：{RoadID}')
         else:
             roadtype = 2
-            RoadID = df[df['RoadId'] ==
+            RoadID = df[df['編碼'] ==
                         traffic["@expresswayId"]]['1.1版本'].values[0]
-            # print(f'快速道路編碼：{traffic["@expresswayId"]}\tRoadId：{RoadID}')
+            print(f'快速道路編碼：{traffic["@expresswayId"]}\tRoadId：{RoadID}')
         # print(f'freewayId:{traffic["@freewayId"]}\texpresswayId:{traffic["@expresswayId"]}\t道路種類:{roadtype}')
         ##---------路段名稱-------------###
         ##起點##
