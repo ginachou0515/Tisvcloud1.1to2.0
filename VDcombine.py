@@ -88,8 +88,22 @@ if __name__ == "__main__":
         "S": "https://tisv.tcloud.freeway.gov.tw/xml/cloud_40/40_1day_eq_config_data.xml",
     }
 
-    # 創建 XML 根節點
-    root = ET.Element("file_attribute", attrib={"file_name": "", "control_center_id": "", "time": ""})
+    # 提取第一個區域的 file_name 和 time
+    first_url = list(urls.values())[0]
+    first_data = url_xml_dict(first_url)
+    if not first_data:
+        print("無法獲取第一個區域的 XML 資料，程式終止")
+        exit()
+
+    file_name = first_data["file_attribute"]["@file_name"]
+    control_center_id = first_data["file_attribute"]["@control_center_id"]
+    time = first_data["file_attribute"]["@time"]
+
+    # 創建 XML 根節點，使用第一個區域的 file_name 和 time
+    root = ET.Element(
+        "file_attribute",
+        attrib={"file_name": file_name, "control_center_id": control_center_id, "time": time},
+    )
     child1 = ET.SubElement(root, "oneday_eq_config_data")
     vd_data = ET.SubElement(child1, "vd_data")
 
