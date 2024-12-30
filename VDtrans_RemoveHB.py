@@ -83,7 +83,7 @@ def combine(Infos, url):
                 "roadway": "單向",
                 "vsrnum": stop["@lanes"],
                 "vdtype": stop["@vd_category"],
-                "locationtype": location,
+                "locationtype": "N(車道/路側)",
                 "px": stop["@longitude"],
                 "py": stop["@latitude"]
             }
