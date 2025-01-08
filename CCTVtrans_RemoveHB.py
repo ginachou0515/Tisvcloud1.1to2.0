@@ -36,11 +36,18 @@ def download_xml(url, output_file):
     try:
         response = requests.get(url)
         response.raise_for_status()
+        if response.text.strip() == "":
+            raise ValueError("下載的 XML 文件為空")
+        if not response.text.strip().startswith("<?xml"):
+            raise ValueError("下載的內容不是有效的 XML 文件")
+
         with open(output_file, 'wb') as file:
             file.write(response.content)
         print(f"下載完成：{output_file}")
     except requests.RequestException as e:
         print(f"下載失敗：{e}")
+    except ValueError as ve:
+        print(f"下載失敗：{ve}")
 
 
 def url_xml_dict(url):
